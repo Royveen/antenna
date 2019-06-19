@@ -1,0 +1,41 @@
+<ion-header>
+    <div class="page-title">
+        Finding Your Satellite 
+    </div>
+</ion-header>
+
+<ion-content *ngIf='!satelliteObject'>
+        <div class="ion-padding page-content" >
+          <p>We have lots of
+                sattelites. We’re looking
+                for a good match... </p>
+        </div>
+        <img src="assets/FE_svgs/spinner.svg">
+        <div class="ion-padding page-svg" height=200 width=200>
+           
+            <ion-icon src="assets/FE_svgs/world.svg" class="svg-style"></ion-icon>
+            <ion-icon src="assets/FE_svgs/satellite.svg" class="satellite-svg" > </ion-icon>
+            <ion-icon src="assets/FE_svgs/satellite.svg" class="satellite-svg satellite-svg-top-left" ></ion-icon>
+            <ion-icon src="assets/FE_svgs/satellite.svg" class="satellite-svg satellite-svg-bottom-left" ></ion-icon>
+            <ion-icon src="assets/FE_svgs/satellite.svg" class="satellite-svg satellite-svg-bottom-right" ></ion-icon>
+        </div>
+      
+      </ion-content>
+
+<ion-content *ngIf='satelliteObject'>
+  <div class="ion-padding page-content">
+    <p> We’ve found the best
+        satellite for you at your
+        current location. Say
+        ‘hello’ to your new best
+        friend, {{satelliteObject.satellite_name}} </p>
+  </div>
+
+  <div class="ion-padding page-svg" height=200 width=200>
+      <img src="assets/FE_svgs/world.svg">
+      <img src="assets/FE_svgs/satellite.svg" class="satellite-svg" />
+  </div>
+  <div class="ion-text-right ion-padding">
+        <ion-button (click)="moveToFinding()">Next</ion-button>
+    </div>
+</ion-content>

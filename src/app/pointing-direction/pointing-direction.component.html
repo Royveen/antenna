@@ -1,0 +1,32 @@
+<ion-header>
+    <div class="page-title">
+        Pointing in the right direction
+    </div>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding page-content">
+    <p> Stand with your phone
+        in your hand, arm
+        extended, screen facing
+        up, and rotate on your
+        feet until the two clock
+        hands on the next
+        screen are at midnight. </p>
+  </div>
+
+  <div class="ion-padding page-svg" >
+    <ion-icon src="assets/FE_svgs/clock face.svg" class="face-style" ></ion-icon>
+    <ion-icon src="assets/FE_svgs/clock spoke.svg" class="spoke-style"></ion-icon>
+    <ion-icon src="assets/FE_svgs/minute hand.svg"  class="minute-style"></ion-icon>
+    <ion-icon src="assets/FE_svgs/hour hand.svg" [ngStyle]="hour_hand_prop" class="hour-style"></ion-icon>
+      <!-- <img src="assets/FE_svgs/clock face.svg" height="100px">
+      <img src="assets/FE_svgs/clock spoke.svg" height="20px"class="spoke-style">
+      <img src="assets/FE_svgs/minute hand.svg" height="25px" class="minute-style">
+      <img src="assets/FE_svgs/hour hand.svg" height="25px" class="hour-style"> -->
+  </div>
+  <div class="ion-text-right ion-padding">
+      <ion-button [disabled]="disableNext" (click)="moveToFinding()">Next</ion-button>
+  </div>
+
+</ion-content>

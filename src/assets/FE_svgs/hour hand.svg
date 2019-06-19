@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="58px" viewBox="0 0 12 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Path</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Direction-5" transform="translate(-181.000000, -368.000000)" fill="#9013FE" fill-rule="nonzero">
+            <g id="noun_clock_2212068" transform="translate(63.000000, 312.000000)">
+                <g id="Group">
+                    <path d="M108.189318,106.469773 C106.685115,106.478469 105.239341,105.887942 104.171364,104.828636 C103.100026,103.766048 102.497414,102.319608 102.497414,100.810682 C102.497414,99.3017558 103.100026,97.8553155 104.171364,96.7927273 L136.201818,64.7622727 C138.420873,62.5432177 142.018672,62.5432177 144.237727,64.7622727 C146.456782,66.9813277 146.456782,70.5791268 144.237727,72.7981818 L112.207273,104.828636 C111.139296,105.887942 109.693521,106.478469 108.189318,106.469773 Z" id="Path" transform="translate(124.199716, 84.783924) rotate(-225.000000) translate(-124.199716, -84.783924) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

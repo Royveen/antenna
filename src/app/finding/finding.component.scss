@@ -1,0 +1,24 @@
+:host {
+    .satellite-svg {
+        font-size: 60px;
+        position: absolute;
+        top: -38px;
+        transform: rotate(90deg);
+
+        &-top-left {
+            left: 50px;
+            transform: rotate(360deg);
+        }
+
+        &-bottom-left {
+            top: 140px;
+            transform: rotate(180deg);
+        }
+
+        &-bottom-right {
+            top: 140px;
+            left: 50px;
+            transform: rotate(270deg);
+        }
+    }
+}

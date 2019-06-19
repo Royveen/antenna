@@ -1,10 +1,11 @@
-// Ionic Variables and Theming. For more info, please see:
-// http://ionicframework.com/docs/theming/
+
 
 /** Ionic CSS Variables **/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #4A90E2;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -74,4 +75,14 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+
+  --ion-background-color: #4A90E2;
+  --ion-text-color: #E9E9E9;
+  --ion-font-family: 'Open Sans';
+
+  ion-button {
+    --background: #9013FE;
+    --border-radius: 28px;
+  }
 }
