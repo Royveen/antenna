@@ -11,13 +11,12 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 export class PointingDirectionComponent implements OnInit  {
 
   public satelliteObject:any=null;
-  public altitude = 0;
   public hour_hand_prop:any = {
     'top.%': 24,
     'left.%': 47,
     transform:''
   }
-  public disableNext = true;
+  public disableNext = false;
   constructor(public navCtrl: NavController, 
     private route: ActivatedRoute,private geolocation: Geolocation) { }
 

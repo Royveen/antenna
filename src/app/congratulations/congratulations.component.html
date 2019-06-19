@@ -4,10 +4,10 @@
     </div>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="satelliteObject && satelliteObject.satellite_name">
   <div class="ion-padding page-content">
     <p> Now you know exactly
-        where SATTEFI-US-117
+        where {{satelliteObject.satellite_name}}
         lives. You should visit!
         But seriously, just point
         your antenna at the
@@ -19,9 +19,9 @@
         options. Otherwise,
         welcome to SatteFi™. </p>
   </div>
-  <div class="ion-text-left ion-padding">
+  <div class="ion-text-left ion-padding button-box">
       <ion-button (click)="moveToFinding()">Fine Tune</ion-button>
-      <ion-button (click)="moveToFinding()">Finish</ion-button>
+      <ion-button  (click)="moveToFinding()">Finish</ion-button>
   </div>
   <div class="ion-text-left ion-padding">
       

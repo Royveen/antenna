@@ -1,0 +1,15 @@
+:host {
+
+    .button-box {
+
+        ion-button:nth-child(1) {
+            width: 50%;
+            --background: #ffffff;
+            color: #9013FE;
+        }
+
+        ion-button:nth-child(2) {
+            width: 46%;
+        }
+    }
+}

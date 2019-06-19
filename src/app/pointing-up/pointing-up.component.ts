@@ -9,15 +9,15 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   styleUrls: ['./pointing-up.component.scss'],
 })
 export class PointingUpComponent implements OnInit {
-
+  public satelliteObject:any=null;
   constructor(public navCtrl: NavController,private route: ActivatedRoute,private geolocation: Geolocation) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params && params.data) {
+        this.satelliteObject = params.data;
         this.geolocation.watchPosition().subscribe((resp) => {
-          console.log(resp)
-          // resp.coords.longitude
+         
          });
       }
     })
@@ -25,6 +25,10 @@ export class PointingUpComponent implements OnInit {
   }
 
   public moveToCongrats() {
-    this.navCtrl.navigateRoot('/congrats');
+    this.navCtrl.navigateRoot('/congrats',{
+      queryParams: {
+        data: this.satelliteObject
+    }
+  });
   };
 }
