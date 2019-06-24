@@ -1,43 +1,71 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ElementRef,ViewChild, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { createText } from '@angular/core/src/view/text';
 
 @Component({
   selector: 'app-pointing-direction',
   templateUrl: './pointing-direction.component.html',
   styleUrls: ['./pointing-direction.component.scss'],
 })
-export class PointingDirectionComponent implements OnInit  {
+export class PointingDirectionComponent {
 
   public satelliteObject:any=null;
-  public hour_hand_prop:any = {
-    'top.%': 24,
-    'left.%': 47,
-    transform:''
-  }
+  
+  @ViewChild('canvas') public canvas: any;
+  private cx: CanvasRenderingContext2D; 
+  
   public disableNext = false;
   constructor(public navCtrl: NavController, 
     private route: ActivatedRoute,private geolocation: Geolocation) { }
 
-  ngOnInit() {
+    ionViewDidEnter () {
+    const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
+    this.cx = canvasEl.getContext('2d');
+    canvasEl.width = 250;
+    canvasEl.height = 250;
+
+    const clockFace = document.createElement('img'),
+    clockSpoke = document.createElement('img'),
+    clockMinute = document.createElement('img'),
+    clockHour = document.createElement('img');
+    
+    clockFace.src = 'assets/FE_svgs/clock face.svg';
+    clockSpoke.src = 'assets/FE_svgs/clock spoke.svg';
+    clockMinute.src = 'assets/FE_svgs/minute hand.svg';
+    clockHour.src = 'assets/FE_svgs/hour hand.svg';
+    
     this.route.queryParams.subscribe(params => {
       if (params && params.data) {
         this.satelliteObject = params.data;
-        this.hour_hand_prop.transform = `rotate(-${this.satelliteObject.altitude}deg)`;
+        setTimeout(() => {
+          this.drawFace(this.cx, canvasEl, clockFace ,clockSpoke );
+          this.drawHand(this.cx, 0 , clockMinute, clockFace,clockSpoke);
+          this.drawHand(this.cx, 0, clockHour, clockFace,clockSpoke);
+        }, 500);
       }
     })
 
     this.geolocation.watchPosition().subscribe((resp) => {
-      if(resp.coords.altitude === this.satelliteObject.altitude ) {
-        this.hour_hand_prop.transform = '';
-        this.disableNext = false;
+      if(resp) {
+      if(this.satelliteObject.altitude === resp.coords.altitude ) {
+        setTimeout(() => {
+          this.drawFace(this.cx,canvasEl, clockFace ,clockSpoke );
+          this.drawHand(this.cx, 0 , clockMinute, clockFace,clockSpoke);
+          this.drawHand(this.cx, 0, clockHour, clockFace,clockSpoke);
+        }, 500);
       }else {
-        this.hour_hand_prop.transform = `rotate(-${resp.coords.altitude}deg)`
+        setTimeout(() => {
+          this.drawFace(this.cx,canvasEl, clockFace ,clockSpoke );
+          this.drawHand(this.cx, 0 , clockMinute, clockFace,clockSpoke);
+          this.drawHand(this.cx, this.satelliteObject.altitude, clockHour, clockFace,clockSpoke);
+        }, 500);
       }
+    }
      });
   }
-
+  
   public moveToFinding() {
     this.navCtrl.navigateRoot('/pointingup',{
       queryParams: {
@@ -45,5 +73,33 @@ export class PointingDirectionComponent implements OnInit  {
     }
   });
   };
+  
+  public drawFace(ctx,canvasEl, clockFace, clockSpoke) {
+    this.clearCanvas(ctx,canvasEl);
+    ctx.beginPath();
+    ctx.drawImage(clockFace,0, 0);
+    ctx.beginPath();
+    ctx.drawImage(clockSpoke,clockFace.width / 2 - clockSpoke.width / 2, clockFace.height / 2 - clockSpoke.height / 2);
+  }
+  
+  public drawHand(ctx, degree, clockImage,clockFace,clockSpoke) {
+    
+    ctx.beginPath();
+    if(degree != 0) {
+      ctx.translate(clockFace.width / 2, clockFace.height / 2 );
+      ctx.rotate(degree*Math.PI/180);
+      ctx.drawImage(clockImage, -clockImage.width/2,-clockImage.width/2);
+      ctx.rotate(-degree);
+    }else {
+      ctx.drawImage(clockImage,clockFace.width / 2 - clockImage.width / 2,
+        clockFace.height / 2 - clockSpoke.height / 2 - clockImage.height);
+    }
+  }
 
+  public clearCanvas(context, canvas) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    var w = canvas.width;
+    canvas.width = 1;
+    canvas.width = w;
+  }
 }

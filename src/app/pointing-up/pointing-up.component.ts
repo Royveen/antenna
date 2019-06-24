@@ -17,7 +17,8 @@ export class PointingUpComponent implements OnInit {
       if (params && params.data) {
         this.satelliteObject = params.data;
         this.geolocation.watchPosition().subscribe((resp) => {
-         
+            // Working
+            // checking if can be done with CSS only or need Canvas too
          });
       }
     })
