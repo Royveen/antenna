@@ -14,22 +14,23 @@ import { FindingComponent } from './finding/finding.component';
 import { PointingUpComponent } from './pointing-up/pointing-up.component';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
 import { SatelliteService } from './services/satellite-service';
-
+import { DeviceOrientation } from '@ionic-native/device-orientation/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
-  declarations: [AppComponent,FindingComponent,PointingDirectionComponent,PointingUpComponent,CongratulationsComponent],
+  declarations: [AppComponent, FindingComponent, PointingDirectionComponent, PointingUpComponent, CongratulationsComponent],
   entryComponents: [
     FindingComponent
   ],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HomePageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HomePageModule],
   providers: [
     StatusBar,
     SplashScreen,
     SatelliteService,
     Geolocation,
+    DeviceOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

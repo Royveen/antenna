@@ -13,7 +13,6 @@ export class CongratulationsComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params && params.data) {
-        console.log(params.data);
         this.satelliteObject = params.data;
       }
     })

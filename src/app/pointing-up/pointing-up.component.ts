@@ -1,35 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Subscriber, Subscription } from 'rxjs';
+import { DeviceOrientation, DeviceOrientationCompassHeading } from '@ionic-native/device-orientation/ngx';
 
 @Component({
   selector: 'app-pointing-up',
   templateUrl: './pointing-up.component.html',
   styleUrls: ['./pointing-up.component.scss'],
 })
-export class PointingUpComponent implements OnInit {
-  public satelliteObject:any=null;
-  constructor(public navCtrl: NavController,private route: ActivatedRoute,private geolocation: Geolocation) { }
+export class PointingUpComponent {
+  public satelliteObject: any = null;
+  public deviceOrientationSubscription: Subscription = null;
+  constructor(public navCtrl: NavController, private route: ActivatedRoute,
+    private deviceOrientation: DeviceOrientation) { 
+     
+    }
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    ionViewDidEnter() {
+     window.addEventListener('deviceorientation',(event)=> {
+       console.log(`${event.alpha} ${event.beta} ${event.gamma}`);
+     }, {once: true});
+     this.route.queryParams.subscribe((params) => {
       if (params && params.data) {
         this.satelliteObject = params.data;
-        this.geolocation.watchPosition().subscribe((resp) => {
-            // Working
-            // checking if can be done with CSS only or need Canvas too
-         });
+        // Get the device current compass heading
+         this.deviceOrientation.getCurrentHeading().then(
+          (data: DeviceOrientationCompassHeading) => console.log(data),
+          (error: any) => console.log(error)
+        );
       }
     })
-    
+
   }
 
+  ionViewDidLeave() {
+    if(this.deviceOrientationSubscription)
+      this.deviceOrientationSubscription.unsubscribe();
+  }
+  
   public moveToCongrats() {
-    this.navCtrl.navigateRoot('/congrats',{
+    this.navCtrl.navigateRoot('/congrats', {
       queryParams: {
         data: this.satelliteObject
-    }
-  });
+      }
+    });
   };
 }
